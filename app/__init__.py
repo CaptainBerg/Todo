@@ -1,10 +1,10 @@
 from flask import Flask
-from flask.ext.mongoengine import MongoEngine
+from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config.from_object('config')
 
-db = MongoEngine(app)
+db = SQLAlchemy(app)
 
 
 from app import views,models

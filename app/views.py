@@ -1,51 +1,53 @@
 from app import app
 from flask import render_template,request
-from models import Todo, TodoForm
+from models import Todo
+from forms import TodoForm
 from datetime import datetime
+from . import db
 
 
 @app.route('/')
 def index():
     form = TodoForm()
-    todos = Todo.objects.order_by('-time')
+    todos = Todo.query.order_by(Todo.time.desc()).all()
     return render_template("index.html",todos=todos,form=form)
 
 
 @app.route('/add', methods=['POST',])
 def add():
-    form = TodoForm(request.form)
-    if form.validate():
+    form = TodoForm()
+    if form.validate_on_submit():
         content = form.content.data
         todo = Todo(content=content,time=datetime.now())
-        todo.save()
-    todos = Todo.objects.order_by('-time')
+        db.session.add(todo)
+    todos = Todo.query.order_by(Todo.time.desc()).all()
     return render_template("index.html",todos=todos,form=form)
 
 @app.route('/done/<string:todo_id>')
 def done(todo_id):
     form = TodoForm()
-    todo = Todo.objects.get_or_404(id=todo_id)
+    todo = Todo.query.get_or_404(todo_id)
     todo.status = 1
-    todo.save()
-    todos = Todo.objects.order_by('-time')
+    db.session.add(todo)
+    todos = Todo.query.order_by(Todo.time.desc()).all()
     return render_template("index.html",todos=todos,form=form)
 
 
 @app.route('/undone/<string:todo_id>')
 def undone(todo_id):
     form = TodoForm()
-    todo = Todo.objects.get_or_404(id=todo_id)
+    todo = Todo.query.get_or_404(todo_id)
     todo.status = 0
-    todo.save()
-    todos = Todo.objects.order_by('-time')
+    db.session.add(todo)
+    todos = Todo.query.order_by(Todo.time.desc()).all()
     return render_template("index.html",todos=todos,form=form)
 
 @app.route('/delete/<string:todo_id>')
 def delete(todo_id):
     form = TodoForm()
-    todo = Todo.objects.get_or_404(id=todo_id)
-    todo.delete()
-    todos = Todo.objects.order_by('-time')
+    todo = Todo.query.get_or_404(todo_id)
+    db.session.delete(todo)
+    todos = Todo.query.order_by(Todo.time.desc()).all()
     return render_template("index.html",todos=todos,form=form)
 
 

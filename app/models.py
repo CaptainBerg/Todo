@@ -1,12 +1,11 @@
-from app import db
-import datetime
-from flask.ext.mongoengine.wtf import model_form
+from . import db
+from datetime import datetime
 
-class Todo(db.Document):
-    content = db.StringField(required=True, max_length=20)
-    time = db.DateTimeField(default = datetime.datetime.now())
-    status = db.IntField(default = 0)
+class Todo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(64))
+    time = db.Column(db.DateTime(), default=datetime.utcnow)
+    status =  db.Column(db.Boolean, default=False)
 
 
-TodoForm = model_form(Todo)
 
