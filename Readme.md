@@ -1,5 +1,4 @@
 Todo
 ======
-a todo web app based on flask and mongodb
+a todo web app based on flask
 =====
-just try to use the github and ubuntu in qcloud
