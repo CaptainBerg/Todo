@@ -1,27 +1,32 @@
 from app import app
-from flask import render_template,request
+from flask import render_template,request,redirect,url_for
 from models import Todo
 from forms import TodoForm
 from datetime import datetime
 from . import db
 
 
-@app.route('/')
+@app.route('/',methods=['GET','POST'])
 def index():
-    form = TodoForm()
-    todos = Todo.query.order_by(Todo.time.desc()).all()
-    return render_template("index.html",todos=todos,form=form)
-
-
-@app.route('/add', methods=['POST',])
-def add():
     form = TodoForm()
     if form.validate_on_submit():
         content = form.content.data
         todo = Todo(content=content,time=datetime.now())
         db.session.add(todo)
+        return redirect(url_for('index'))
     todos = Todo.query.order_by(Todo.time.desc()).all()
     return render_template("index.html",todos=todos,form=form)
+
+
+# @app.route('/add', methods=['POST',])
+# def add():
+#     form = TodoForm()
+#     if form.validate_on_submit():
+#         content = form.content.data
+#         todo = Todo(content=content,time=datetime.now())
+#         db.session.add(todo)
+#     todos = Todo.query.order_by(Todo.time.desc()).all()
+#     return render_template("index.html",todos=todos,form=form)
 
 @app.route('/done/<string:todo_id>')
 def done(todo_id):

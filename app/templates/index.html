@@ -1,16 +1,14 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}Todo{% endblock %}
+
+
 {% block content %}
-    <form class="input-group" action="/add" method="post">
-        {{ form.hidden_tag() }}
-        {{ form.content(class="form-control") }}
-    <span class="input-group-btn">
-        <button class="btn btn-default" type="submit">Add</button>
-    </span>
-    </form>
-    {% for error in form.errors.content %}
-        <div>{{ error }}</div>
-    {% endfor %}
-    <div>
+<div class="input-group">
+    {{ wtf.quick_form(form) }}
+</div>
+
+ <div>
         <h2>Todo List</h2>
         {% if todos %}
             <table class="table">
@@ -51,4 +49,3 @@
 
     </div>
 {% endblock %}
-
