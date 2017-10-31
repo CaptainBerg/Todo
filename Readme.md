@@ -1,5 +1,7 @@
 Todo
 ======
-a todo web app based on flask and mongodb
+a todo web app based on flask and mysql
 =====
-just try to use the github and ubuntu in qcloud
+just try to use the github and ubuntu
+
+www.echobobo.xin
