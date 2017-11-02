@@ -2,5 +2,8 @@ flask
 flask-wtf
 flask-script
 flask-sqlalchemy
+flask-migrate
+flask-login
+flask-bootstrap
 gunicorn
 pymysql

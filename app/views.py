@@ -86,6 +86,10 @@ def logout():
     flash('you have been logged out')
     return redirect(url_for('index'))
 
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
 
 
 @app.errorhandler(404)

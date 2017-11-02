@@ -1,4 +1,11 @@
 {% extends "bootstrap/base.html" %}
+
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+{% endblock %}
+
 {% block navbar %}
 <div class="navbar navbar-inverse" role="navigation">
     <div class="container">
@@ -14,9 +21,9 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="{{ url_for('addtag') }}">AddTag</a></li>
-                {% if current_user.is_authenticated %}
-                <li><a href="{{ url_for('index') }}">Profile</a></li>
-                {% endif %}
+
+                <li><a href="{{ url_for('profile') }}">Profile</a></li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
