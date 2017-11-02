@@ -4,26 +4,35 @@
 
 
 {% block content %}
-<div class="input-group">
-    {{ wtf.quick_form(form) }}
+<div align="center">
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.todo_content.label }} {{ form.todo_content(size=20) }}<br>
+        {{form.select_tag.label}}{{form.select_tag()}}<br>
+        {{ form.submit()}}
+    </form>
+
+
 </div>
 
  <div>
         <h2>Todo List</h2>
-        {% if todos %}
+        {% if alltodos %}
             <table class="table">
                 <thead>
                     <tr>
                         <th>content</th>
+                        <th>tag</th>>
                         <th>status</th>
                         <th>time</th>
                         <th>operate</th>
                     </tr>
                 </thead>
                 <tbody>
-                   {% for todo in todos %}
+                   {% for todo in alltodos %}
                         <tr>
-                            <td>{{ todo.content }}</td>
+                            <td>{{ todo.todo_content }}</td>
+                            <td>{{todo.tag.tag_content}}</td>
                             <td>
                                 {% if todo.status == 1 %}
                                 已完成
