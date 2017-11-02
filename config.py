@@ -1,6 +1,6 @@
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
-mysqlpsd='cbsql123'
+mysqlpsd=''
 
 SECRET_KEY = "abcde"
 SQLALCHEMY_COMMIT_ON_TEARDOWN = True
