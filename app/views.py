@@ -15,6 +15,9 @@ def index():
     if form.validate_on_submit():
         todo_content = form.todo_content.data
         thistag=Tag.query.filter_by(tag_content=form.select_tag.data).first()
+        # if thistag=='':
+        #     flash("you should add a tag first")
+        #     return redirect('index')
         todo = Todo(todo_content=todo_content,tag=thistag)
         db.session.add(todo)
         return redirect(url_for('index'))
