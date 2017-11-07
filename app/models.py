@@ -8,7 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     todo_content = db.Column(db.String(64))
-    time = db.Column(db.DateTime(), default=datetime.utcnow)
+    time = db.Column(db.DateTime(), default=datetime.now)
     status =  db.Column(db.Boolean, default=False)
     tag_id=db.Column(db.Integer,db.ForeignKey('tag.id'),default=1)
 
