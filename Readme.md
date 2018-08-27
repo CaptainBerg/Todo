@@ -1,5 +1,3 @@
 Todo
 ======
-a todo web app based on flask and mysql
-=====
-just try to use the github and ubuntu
+用flask和bootstrap做的一个Todo应用，支持给todo分类
